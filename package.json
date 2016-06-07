@@ -1,10 +1,9 @@
 {
   "name": "gulp-index",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Creates an index file based on the files passed from the glob",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
   },
   "repository": {
     "type": "git",
