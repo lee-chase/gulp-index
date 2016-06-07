@@ -37,11 +37,12 @@ module.exports = function(opts) {
   });
 
   let listTab = opts['list-start-template']() ? 1 : 0;
-  let frontMatter = opts['prepend-to-output'];
-  let endMatter = opts['append-to-output'];
-  let bodyTab = frontMatter.length ? 1 : 0;
-  let tabIt = function() {
-    return opts['tab-string'].repeat(opts['tab-depth'] + listTab + bodyTab);
+  let frontMatter = opts['prepend-to-output']();
+  let endMatter = opts['append-to-output']();
+  let bodyTab = frontMatter.length > 0 ? 1 : 0;
+  let tabDepth = opts['tab-depth'];
+  let tabIt = function(depth) {
+    return opts['tab-string'].repeat(depth);
   };
 
   let files = [];
@@ -54,7 +55,8 @@ module.exports = function(opts) {
   let onFlush = function(callback) {
     let output, itemList, outFile, rollingPath = '';
 
-    output = tabIt() + opts['title-template'](opts.title);
+    output = tabIt(tabDepth) + frontMatter;
+    output += tabIt(tabDepth + bodyTab) + opts['title-template'](opts.title);
 
     if (files.length) {
       files.sort((a, b) => a.localeCompare(b));
@@ -69,31 +71,32 @@ module.exports = function(opts) {
           if (rollingPath !== '') {
             output += itemList;
             if (listTab) {
-              output += tabIt() + opts['list-end-template']();
+              output += tabIt(tabDepth + bodyTab) + opts['list-end-template']();
             }
-            output += tabIt() + opts['section-end-template']();
+            output += tabIt(tabDepth + bodyTab) + opts['section-end-template']();
           }
           rollingPath = currentPath;
 
-          output += tabIt() + opts['section-start-template']();
-          output += tabIt() + opts['section-heading-template'](rollingPath);
+          output += tabIt(tabDepth + bodyTab) + opts['section-start-template']();
+          output += tabIt(tabDepth + bodyTab) + opts['section-heading-template'](rollingPath);
           if (listTab) {
-            output += tabIt() + opts['list-start-template']();
+            output += tabIt(tabDepth + bodyTab) + opts['list-start-template']();
           }
 
           itemList = '';
         }
 
-        itemList += tabIt() + opts['item-template'](rollingPath, file.substr(currentPath.length + 1));
+        itemList += tabIt(tabDepth + listTab + bodyTab) + opts['item-template'](rollingPath, file.substr(currentPath.length + 1));
       });
 
       output += itemList;
       if (listTab) {
-        output += tabIt() + opts['list-end-template']();
+        output += tabIt(tabDepth + bodyTab) + opts['list-end-template']();
       }
-      output += tabIt() + `</section>
+      output += tabIt(tabDepth + bodyTab) + `</section>
 `;
     }
+    output += tabIt(tabDepth) + endMatter;
 
     outFile = new File({
       path: opts.outputFile,

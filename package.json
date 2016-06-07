@@ -1,6 +1,6 @@
 {
   "name": "gulp-index",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Creates an index file based on the files passed from the glob",
   "main": "index.js",
   "scripts": {
