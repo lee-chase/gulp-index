@@ -1,0 +1,40 @@
+{
+  "name": "gulp-index",
+  "version": "1.0.0",
+  "description": "Creates an index file based on the files passed from the glob",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lee-chase/gulp-index.git"
+  },
+  "keywords": [
+    "gulp",
+    "index",
+    "file"
+  ],
+  "author": "Lee Chase",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lee-chase/gulp-index/issues"
+  },
+  "homepage": "https://github.com/lee-chase/gulp-index#readme",
+  "dependencies": {
+    "defaults": "^1.0.3",
+    "gulp-util": "^3.0.7",
+    "path": "^0.12.7",
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3",
+    "mocha-lcov-reporter": "^1.2.0",
+    "should": "^9.0.0",
+    "stream-array": "^1.1.2",
+    "stream-assert": "^2.0.3"
+  }
+}

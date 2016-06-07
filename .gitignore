@@ -1,0 +1,6 @@
+# This identifies the files and directories that should NOT be checked
+# in to the git repository.
+
+# Dependency directories
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
