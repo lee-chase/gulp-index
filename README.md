@@ -37,30 +37,42 @@ gulp.task('html:buildIndex', function() {
 This will build a index.html from the files found in `./src/client` in the distribution folder `./dist/client`.
 
 ```html
-<h1 class="index__title">Index page</h1>
-<section class="index__section">
-  <h2 class="index__section-heading">src</h2>
-  <ul class="index__list">
-    <li class="index__item">
-      <a class="index__item-link" href="src/client/pages/home.html">src - client/pages/home.html</a>
-    </li>
-    <li class="index__item">
-      <a class="index__item-link" href="src/client/pages/test.html">src - client/pages/test.html</a>
-    </li>
-    <li class="index__item">
-      <a class="index__item-link" href="src/client/pages/about.html">src - client/pages/about.html</a>
-    </li>
-    <li class="index__item">
-      <a class="index__item-link" href="src/client/components/button.html">src - client/components/button.html</a>
-    </li>
-  </ul>
-</section>
+<head>
+</head>
+<body>
+  <h1 class="index__title">Index page</h1>
+  <section class="index__section">
+    <h2 class="index__section-heading">src</h2>
+    <ul class="index__list">
+      <li class="index__item">
+        <a class="index__item-link" href="src/client/pages/home.html">src - client/pages/home.html</a>
+      </li>
+      <li class="index__item">
+        <a class="index__item-link" href="src/client/pages/test.html">src - client/pages/test.html</a>
+      </li>
+      <li class="index__item">
+        <a class="index__item-link" href="src/client/pages/about.html">src - client/pages/about.html</a>
+      </li>
+      <li class="index__item">
+        <a class="index__item-link" href="src/client/components/button.html">src - client/components/button.html</a>
+      </li>
+    </ul>
+  </section>
+</body>
 ```
 
 Various options can be specified, the default are:
 
 ```js
 {
+  // written out before index contents
+  'prepend-to-output': () => `<head>
+</head>
+<body>
+`,
+  // written out after index contents
+  'append-to-output': () => `</body>
+`,
   // Title for the index page
   'title': 'Index page',
   // Title template function used to construct the title section
@@ -111,29 +123,33 @@ gulp.task('html:buildIndex', function({relativePath: './src/client'}) {
 Splits pages and components into sections
 
 ```html
-<h1 class="index__title">Index page</h1>
-<section class="index__section">
-  <h2 class="index__section-heading">pages</h2>
-  <ul class="index__list">
-    <li class="index__item">
-      <a class="index__item-link" href="pages/home.html">pages - home.html</a>
-    </li>
-    <li class="index__item">
-      <a class="index__item-link" href="pages/test.html">pages - test.html</a>
-    </li>
-    <li class="index__item">
-      <a class="index__item-link" href="pages/about.html">pages - about.html</a>
-    </li>
-  </ul>
-</section>
-<section class="index__section">
-  <h2 class="index__section-heading">components</h2>
-  <ul class="index__list">
-    <li class="index__item">
-      <a class="index__item-link" href="components/button.html">components - button.html</a>
-    </li>
-  </ul>
-</section>
+<head>
+</head>
+<body>
+  <h1 class="index__title">Index page</h1>
+  <section class="index__section">
+    <h2 class="index__section-heading">pages</h2>
+    <ul class="index__list">
+      <li class="index__item">
+        <a class="index__item-link" href="pages/home.html">pages - home.html</a>
+      </li>
+      <li class="index__item">
+        <a class="index__item-link" href="pages/test.html">pages - test.html</a>
+      </li>
+      <li class="index__item">
+        <a class="index__item-link" href="pages/about.html">pages - about.html</a>
+      </li>
+    </ul>
+  </section>
+  <section class="index__section">
+    <h2 class="index__section-heading">components</h2>
+    <ul class="index__list">
+      <li class="index__item">
+        <a class="index__item-link" href="components/button.html">components - button.html</a>
+      </li>
+    </ul>
+  </section>
+</body>
 ```
 
 
