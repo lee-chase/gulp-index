@@ -84,9 +84,9 @@ ${listContent}</ul>
   }
 
   let tabIt = function(depth, tab, srcString) {
-    var regex = /^/gm;
+    var regex = /^(.)/gm; // non empty line start
     var tabN = tab.repeat(depth);
-    return srcString.replace(regex, tabN);
+    return srcString.replace(regex, tabN + '$1');
   };
 
   let files = [];
@@ -113,7 +113,8 @@ ${listContent}</ul>
 
         if (currentPath !== rollingPath) {
           if (rollingPath !== '') {
-            let listTmp = tabIt(listTab, tabString, listTemplate(tabIt(1, tabString, itemList)));
+            let listAndHeading = tabIt(listTab, tabString, opts['section-heading-template'](rollingPath) + itemList);
+            let listTmp = tabIt(1, tabString, listTemplate(listAndHeading));
             output += tabIt(tabDepth + bodyTab, tabString, sectionTemplate(listTmp));
           }
           rollingPath = currentPath;
@@ -125,7 +126,8 @@ ${listContent}</ul>
       });
 
       if (itemList.length > 0) {
-        let listTmp = tabIt(listTab, tabString, listTemplate(tabIt(1, tabString, itemList)));
+        let listAndHeading = tabIt(listTab, tabString, opts['section-heading-template'](rollingPath) + itemList);
+        let listTmp = tabIt(1, tabString, listTemplate(listAndHeading));
         output += tabIt(tabDepth + bodyTab, tabString, sectionTemplate(listTmp));
       }
     }
