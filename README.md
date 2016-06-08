@@ -61,6 +61,7 @@ This will build a index.html from the files found in `./src/client` in the distr
 </body>
 ```
 
+## options
 Various options can be specified, the default are:
 
 ```js
@@ -148,8 +149,21 @@ Splits pages and components into sections
 </body>
 ```
 
+## Wrapping up
+Wrapping you're output in something more intersting.
 
-## LICENSE
+```js
+return gulp.src(client.html.indexIn)
+  .pipe(index({
+    'prepend-to-output': () => fs.readFileSync('./src/index-partials/index-front-matter.html'),
+    'append-to-output': () => fs.readFileSync('./src/index-partials/index-end-matter.html'),
+    relativePath: './src/client'
+  }))
+  .pipe(gulp.dest(dist));
+```
+
+
+# LICENSE
 
 The MIT License (MIT)
 
