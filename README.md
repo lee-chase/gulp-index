@@ -80,26 +80,22 @@ Various options can be specified, the default are:
 `,
   // folders to use as heading, affected by 'relativePath'
   'pathDepth': 1,
-  // Section start fuction used to construct begining of each section identified using path depth
-  'section-start-template': () => `<section class="index__section">
+  // Section function used to construct each section identified using path depth
+  'section-template': (sectionContent) => `<section class="index__section">
+${sectionContent}</section>
 `,
   // Section heading function used to construct each section heading
   'section-heading-template': (heading) => `<h2 class="index__section-heading">${heading}</h2>
 `,
-  // Section end function used to terminate a section
-  'section-end-template': () => `</section>
-`,
-  // List start function used to begin a file list
-  'list-start-template': () => `<ul class="index__list">
-`,
-  // List end function used to terminate a list
-  'list-end-template': () => `</ul>
+  // List function used to construct a file list
+  'list-template': (listContent) => `<ul class="index__list">
+${listContent}</ul>
 `,
   // Item function used to construct each list item
   'item-template': (filepath, filename) => `<li class="index__item"><a class="index__item-link" href="${filepath}/${filename}">${filepath} - ${filename}</a></li>
 `,
   // part of path to discard e.g. './src/client' when creating index
-  'relativePath': '',
+  'relativePath': './src/client',
   // name of output file
   'outputFile': './index.html',
   // initial tab depth
