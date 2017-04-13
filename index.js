@@ -35,7 +35,7 @@ ${sectionContent}</section>
 ${listContent}</ul>
 `,
     // Item function used to construct each list item
-    'item-template': (filepath, filename) => `<li class="index__item"><a class="index__item-link" href="${filepath}/${filename}">${filepath} - ${filename}</a></li>
+    'item-template': (filepath, filename) => `<li class="index__item"><a class="index__item-link" href="${filepath ? filepath + '/' + filename : filename}">${filepath ? filepath + '-' + filename : filename}</a></li>
 `,
     // part of path to discard e.g. './src/client' when creating index
     'relativePath': './src/client',
@@ -118,11 +118,12 @@ ${listContent}</ul>
             output += tabIt(tabDepth + bodyTab, tabString, sectionTemplate(listTmp));
           }
           rollingPath = currentPath;
-
           itemList = '';
         }
 
-        itemList += opts['item-template'](rollingPath, file.substr(currentPath.length + 1));
+        let filePath = rollingPath.length === file.length ? null : rollingPath;
+        let fileName = filePath ? file.substr(currentPath.length + 1) : currentPath;
+        itemList += opts['item-template'](filePath, fileName);
       });
 
       if (itemList.length > 0) {
