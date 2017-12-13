@@ -107,7 +107,7 @@ ${listContent}</ul>
 
       files.forEach(function(file) {
         let currentPath, remainingPath;
-        let pathParts = file.split('/');
+        let pathParts = file.split(path.sep);
         pathParts.length = (opts.pathDepth < pathParts.length ? opts.pathDepth : pathParts.length);
         currentPath = pathParts.join('/');
 
